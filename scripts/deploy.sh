@@ -3,6 +3,7 @@
 ############################################################################
 # get variables from input
 BRANCH=$1
+SCRIPTPATH=$(dirname $0)
 
 if [[ -z "$BRANCH" ]]
 then 
@@ -28,6 +29,8 @@ function e {
 
 ############################################################################
 ## project custom environment setup
+cd $SCRIPTPATH
+cd ../
 echo 'starting the updated biach ###########################'
 git stash
 git fetch
@@ -38,7 +41,7 @@ git stash pop
 
 #############################################################################
 ## application setup
-if [ ! -f ../composer.phar ];then
+if [ ! -f composer.phar ];then
     echo 'Downloading composer ###########################'
     curl  https://getcomposer.org/installer | php
     e $? 'DONE' 'FAILED'
@@ -55,5 +58,3 @@ echo 'Cleaning logs  ###########################'
 rm -rf ../app/cache/*
 rm -rf ../app/logs/*
 e $? 'DONE' 'FAILED'
-
-
