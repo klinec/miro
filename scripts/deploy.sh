@@ -31,12 +31,10 @@ function e {
 echo 'starting the updated biach ###########################'
 git stash
 git fetch
-git branch -D $BRANCH
-git checkout origin//$BRANCH -b $BRANCH
-echo $BRANCH
+git branch -D $BRANCH > /dev/null 2>&1
+git checkout origin/$BRANCH -b $BRANCH
+echo "git checkout origin/$BRANCH -b $BRANCH"
 git stash pop
-
-
 
 #############################################################################
 ## application setup
